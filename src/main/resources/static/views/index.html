@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>ATC Subsystem</title>
+</head>
+<body ng-app="atcdemo">
+<hr/>
+<div class="container" ng-controller="QueueDequeueController">
+
+ 	<p>This is ATC Subsystem to demonstrate that the planes' queue request are maintained in a data structure
+ 	and they are dequeued such that they are dequeued in the following order:
+ 	<br>1st EL=Emergency Large, 2nd ES= Emergency Small
+    <br>3rd VL = Vip Large, 4th VS= Vip Small.
+    <br>5th CL = Cargo large, 6th CS = Cargo small.
+    <br>Such that: a passenger small plane will have priority to land even if it is queued after Cargo Large etc.</p>  
+ 	
+    <p>Add test planes (Press the following button) to see their add sequence and dequeue sequence which is as follows:<br>
+    EL, ES, VL, VS, PL,PS, CL,CS</br></p>
+    <div class="row">
+    <ng-model="plane.thePlaneName">
+        <button ng-click="queueTestPlane()" class="btn btn-sm btn-info">Queue Test Planes</button>
+    </div>
+    <hr/>
+    <h1>OR</h1>
+    <P>Enter planes to queue manually(Press the following button), the dequeue sequence is shown at in the next life at button press.</p>
+    <div class="row">
+        <label>Queue Plane</label> <input type="text" ng-model="plane.thePlaneName" ng-list class="input-sm custom-width spacing"
+                                     placeholder="Enter any plane to request queue"/>
+        <button ng-click="queuePlane()" class="btn btn-sm btn-info">Queue Plane</button>
+    </div>
+    <hr/>
+    <p> The following shows the dequeue sequence based on the above priority order,
+    <br> queuePositionId is the sequence at which the plane was queued</p>
+    <hr/> 
+    <div class="row">
+        <p>{{allDqPlanes | json}}</p>
+    </div>
+    <hr/>
+       
+</div>
+</body>
+<script src="js/lib/angular.min.js"></script>
+<script src="js/lib/ui-bootstrap-tpls-2.5.0.min.js"></script>
+<script src="js/app/app.js"></script>
+<script src="js/app/QueueDequeueController.js"></script>
+<script src="js/app/QueueDequeueService.js"></script>
+<link rel="stylesheet" href="css/lib/bootstrap.min.css"/>
+<link rel="stylesheet" href="css/app/app.css"/>
+</html>

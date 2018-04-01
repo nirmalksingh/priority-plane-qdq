@@ -8,5 +8,6 @@ var demoApp = angular.module('atcdemo', [ 'ui.bootstrap', 'atcdemo.controllers',
 demoApp.constant("CONSTANTS", {
 	getDequeueOrder : "/plane/getDequeueOrder",
 	queueTestPlane : "/plane/queueTestPlane",
-	queuePlane : "/plane/queuePlane/"
+	queuePlane : "/plane/queuePlane/",
+	resetQueues : "/plane/resetQueues"
 });

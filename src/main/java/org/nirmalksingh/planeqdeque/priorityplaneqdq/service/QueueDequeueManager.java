@@ -133,5 +133,16 @@ public class QueueDequeueManager implements Serializable{
 		return getQdqManager();
 	}
 	
+	public void nullAllQueues() {
+		ems=null;
+		eml=null;
+		vpl=null;
+		vps=null;
+		pgl=null;
+		pgs=null;
+		cgl=null;
+		cgs=null;
+		qDqManager = null;
+	}
 	
 }

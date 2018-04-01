@@ -2,6 +2,8 @@ package org.nirmalksingh.planeqdeque.priorityplaneqdq.controller;
 /**
  * Nirmal Singh 2018(nirmalksingh@gmail.com)
  */
+import java.util.List;
+
 import org.nirmalksingh.planeqdeque.priorityplaneqdq.service.Airplane;
 import org.nirmalksingh.planeqdeque.priorityplaneqdq.service.Constants;
 import org.nirmalksingh.planeqdeque.priorityplaneqdq.service.QueueDequeueService;
@@ -24,7 +26,7 @@ public class AtcQdQController {
 		qDqService.queuePlane(thePlaneName);
 	}
 	@RequestMapping(Constants.GET_DEQUEUE_ORDER)
-	public Airplane[] getDequeueOrder() {
+	public List<Airplane> getDequeueOrder() {
 		return qDqService.dequeueAllPlanes();
 	}
 	
@@ -32,4 +34,9 @@ public class AtcQdQController {
 	public void queueTestPlane() {
 		qDqService.queueTestPlane();
 	}
+	@RequestMapping(Constants.RESET_QUEUE)
+	public void resetQueues() {
+		qDqService.resetQueues();
+	}
+	
 }

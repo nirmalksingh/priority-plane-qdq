@@ -10,35 +10,39 @@
 <div class="container" ng-controller="QueueDequeueController">
 
  	<p>This is ATC Subsystem to demonstrate that the planes' queue request are maintained in a data structure
- 	and they are dequeued such that they are dequeued in the following order:
- 	<br>1st EL=Emergency Large, 2nd ES= Emergency Small
-    <br>3rd VL = Vip Large, 4th VS= Vip Small.
-    <br>5th CL = Cargo large, 6th CS = Cargo small.
+ 	and they are dequeued in the following order:
+ 	<br>1st EML=Emergency Large, 2nd EMS= Emergency Small
+    <br>3rd VPL = Vip Large, 4th VPS= Vip Small.
+    <br>5th PGL = Passenger Large, 6th PGS= Passenger Small.
+    <br>7th CGL = Cargo large, 8th CGS = Cargo small.
     <br>Such that: a passenger small plane will have priority to land even if it is queued after Cargo Large etc.</p>  
  	
-    <p>Add test planes (Press the following button) to see their add sequence and dequeue sequence which is as follows:<br>
-    EL, ES, VL, VS, PL,PS, CL,CS</br></p>
+    <p>Add test planes (Press the following button) to see their add sequence and dequeue sequence</p>
     <div class="row">
-    <ng-model="plane.thePlaneName">
         <button ng-click="queueTestPlane()" class="btn btn-sm btn-info">Queue Test Planes</button>
     </div>
     <hr/>
-    <h1>OR</h1>
-    <P>Enter planes to queue manually(Press the following button), the dequeue sequence is shown at in the next life at button press.</p>
+    <b><i>OR</i></b>
+    <hr/>
+    <p>Enter planes to queue manually(Press the following button), the dequeue sequence is shown in the next line on button press.</p>
+    <p>Only valid inputs are: EML, EMS, VPL, VPS, PGL, PGS, CGL, CGS for emergency large/small etc.</p>
     <div class="row">
-        <label>Queue Plane</label> <input type="text" ng-model="plane.thePlaneName" ng-list class="input-sm custom-width spacing"
-                                     placeholder="Enter any plane to request queue"/>
+        <input type="text" maxlength="3" onfocus="this.value=''" autocomplete="off" ng-model="plane.thePlaneName" ng-list class="input-sm custom-width spacing"/>
         <button ng-click="queuePlane()" class="btn btn-sm btn-info">Queue Plane</button>
     </div>
     <hr/>
-    <p> The following shows the dequeue sequence based on the above priority order,
-    <br> queuePositionId is the sequence at which the plane was queued</p>
+    <p>  -the following shows the dequeue order(top to bottom) confirming to the given priority order above.
+    <br> -the first two letters indicates the type and size of plane(EL is Emergency Large).
+    <br> -and the number that follows indicates when that plane was put in the queue.
+    <br> -each type of plane (among the 4 types) is assigned their own sequence number for when it was put in the queue.
+     </p>
     <hr/> 
-    <div class="row">
-        <p>{{allDqPlanes | json}}</p>
-    </div>
-    <hr/>
-       
+
+	<button ng-click="resetQueues()" class="btn btn-sm btn-info">Reset Queues</button>
+	<ul>
+	  <li ng-repeat="plane in allDqPlanes">{{ plane.thePlaneName }}</li>
+	</ul>
+    
 </div>
 </body>
 <script src="js/lib/angular.min.js"></script>

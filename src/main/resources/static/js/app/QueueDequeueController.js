@@ -6,10 +6,6 @@
 var module = angular.module('atcdemo.controllers', []);
 module.controller("QueueDequeueController", [ "$scope", "QueueDequeueService",
 		function($scope, QueueDequeueService) {
-
-	        $scope.plane = {
-	        		thePlaneName : null
-	        };
 	
 			$scope.queueTestPlane = function() {
 				QueueDequeueService.queueTestPlane().then(function() {
@@ -21,11 +17,18 @@ module.controller("QueueDequeueController", [ "$scope", "QueueDequeueService",
 					}, function(value) {
 						console.log("no callback");
 					});
-					
-					$scope.plane = {
-							thePlaneName : null
-						};
-					
+					$scope.allDqPlanes=[];
+				}, function(reason) {
+					console.log("error occured");
+				}, function(value) {
+					console.log("no callback");
+				});
+			}
+			
+			$scope.resetQueues = function() {
+				QueueDequeueService.resetQueues().then(function() {
+					console.log("works");
+					$scope.allDqPlanes=[];
 				}, function(reason) {
 					console.log("error occured");
 				}, function(value) {
@@ -43,6 +46,8 @@ module.controller("QueueDequeueController", [ "$scope", "QueueDequeueService",
 					}, function(value) {
 						console.log("no callback");
 					});
+					
+					$scope.allDqPlanes = [];
 					
 				}, function(reason) {
 					console.log("error occured");

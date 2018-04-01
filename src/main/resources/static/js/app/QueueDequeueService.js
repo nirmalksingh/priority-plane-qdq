@@ -16,5 +16,8 @@ angular.module('atcdemo.services', []).factory('QueueDequeueService',
 				var url = CONSTANTS.queuePlane + thePlaneName;
 				return $http.get(url);
 			}
+			service.resetQueues = function() {
+				return $http.get(CONSTANTS.resetQueues);
+			}
 			return service;
 		} ]);

@@ -2,7 +2,10 @@ package org.nirmalksingh.planeqdeque.priorityplaneqdq.service;
 /**
  * Nirmal Singh 2018(nirmalksingh@gmail.com)
  */
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -40,18 +43,41 @@ public class QueueDequeueService {
 		addCgsPlanes();			
 	}
 	
-	public Airplane[] dequeueAllPlanes(){
-		Stream<Airplane> combinedStream2 =
-				Stream.concat(Stream.concat(
+	public void resetQueues(){
+		qDqManager.getCgsQ().clear();
+		qDqManager.getCglQ().clear();
+		qDqManager.getEmlQ().clear();
+		qDqManager.getEmsQ().clear();
+		qDqManager.getVplQ().clear();
+		qDqManager.getVpsQ().clear();
+		qDqManager.getPglQ().clear();
+		qDqManager.getPgsQ().clear();
+		qDqManager.nullAllQueues();
+	}
+	
+//	public Airplane[] dequeueAllPlanes(){
+//		Stream<Airplane> combinedStream2 =
+//				Stream.concat(Stream.concat(
+//				Stream.concat(Stream.concat(
+//				Stream.concat(Stream.concat(
+//				Stream.concat(
+//				qDqManager.getEmlQ().stream(), qDqManager.getEmsQ().stream()),
+//				qDqManager.getVplQ().stream()),qDqManager.getVpsQ().stream()),
+//				qDqManager.getPglQ().stream()),qDqManager.getPgsQ().stream()),
+//				qDqManager.getCglQ().stream()),qDqManager.getCgsQ().stream());
+//		return combinedStream2.toArray(Airplane[]::new);
+//	}
+	
+	public List<Airplane> dequeueAllPlanes(){
+		List<Airplane> dequeueList = Stream.concat(Stream.concat(
 				Stream.concat(Stream.concat(
 				Stream.concat(Stream.concat(
 				Stream.concat(
 				qDqManager.getEmlQ().stream(), qDqManager.getEmsQ().stream()),
 				qDqManager.getVplQ().stream()),qDqManager.getVpsQ().stream()),
 				qDqManager.getPglQ().stream()),qDqManager.getPgsQ().stream()),
-				qDqManager.getCglQ().stream()),qDqManager.getCgsQ().stream());
-
-		return combinedStream2.toArray(Airplane[]::new);
+				qDqManager.getCglQ().stream()),qDqManager.getCgsQ().stream()).collect(Collectors.toList());
+				return dequeueList;
 	}
 	
 	private static void addCglPlanes() {

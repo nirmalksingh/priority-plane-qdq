@@ -37,6 +37,7 @@ server.port = 8085
 -add text file named "Dockerfile" in the application with the following:
 
 "FROM openjdk:8"
+
 "ADD target/priority-plane-qdq-0.0.1-SNAPSHOT.jar priority-plane-qdq.jar
 "EXPOSE 8085"
 "ENTRYPOINT ["java", "-jar", "priority-plane-qdq.jar"]"
@@ -53,9 +54,3 @@ server.port = 8085
 
 
 happy dockering!
-
-
-
-
-
-

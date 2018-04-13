@@ -24,22 +24,33 @@ Or
 happy queueing and dequeueing!
 
 ---To Dockerize the above spring boot application---
+
 The application can be run in an isolated environment (container) within few steps(not accounting the docker installation and dockerhub account creation).
 Assuming the docker is installed and you do have a dockerhub account, follow the steps below to containerize the application.
 
 -in the application priority-plane-qdq add or edit applicationContext.txt to give a new port 
+
 server.port = 8085
+
 -re/build the application (just like above: mvn clean package)
+
 -add text file named "Dockerfile" in the application with the following:
+
 "FROM openjdk:8"
 "ADD target/priority-plane-qdq-0.0.1-SNAPSHOT.jar priority-plane-qdq.jar
 "EXPOSE 8085"
 "ENTRYPOINT ["java", "-jar", "priority-plane-qdq.jar"]"
+
 -issue the following commands (prompt should be at the path where priority-plane-qdq is on your machine )
+
 "docker build -f Dockerfile -t priority-plane-qdq ." (this builds the docker image out of the jar built in the steaps above)
+
 "docker images" (this shows a list of images)
+
 "docker run -p 8085:8085 priority-plane-qdq"
+
 -now go to http://localhost:8085/home
+
 
 happy dockering!
 
